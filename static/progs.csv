@@ -1,0 +1,110 @@
+#TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
+#,System Core Utilities,
+A,task-spooler,queues commands or files for download.
+,arandr,allows the user to customize monitor arrangements.
+,gnome-keyring,serves as the system keyring.
+,man-db,lets you read man pages of programs.
+,moreutils,is a collection of useful unix tools. 
+,pass,a simple cli password manager.
+,xcompmgr,is for transparency and removing screen-tearing. 
+,xorg-server,is the graphical server. This first one may take a while as it pulls many other dependencies first on clean installs. 
+,xorg-xbacklight,enables changing screen brightness levels. 
+,xorg-xinit,starts the graphical server. 
+,xorg-xprop,is a tool for detecting window properties. 
+,xorg-xset,user preference utility for X. Increases keypress rate. 
+,xorg-xwininfo,allows querying information about windows. 
+#,,
+#,User Interface and Accessibility,
+A,gtk-theme-arc-gruvbox-git,provides a dark GTK theme.
+,dunst,is a suckless notification system. 
+,libnotify,allows desktop notifications. 
+,python-qdarkstyle,provides a dark Qt theme.
+,unclutter,hides an inactive mouse.
+,xwallpaper,sets the wallpaper. 
+#,,
+#,Fonts and Typography,
+,noto-fonts,is an expansive font package. 
+,noto-fonts-emoji,is an emoji font. 
+,ttf-dejavu,properly displays emojis. 
+,ttf-font-awesome,provides extended glyph support. 
+,ttf-hack-nerd,provides the mono font for MARS. 
+#,,
+#,File Management,
+,atool,manages and gives information about archives. 
+,dosfstools,allows your computer to access dos-like filesystems. 
+,exfat-utils,allows management of FAT drives. 
+,fzf,is a fuzzy finder tool used for easy selection and location of files.
+,mediainfo,shows audio and video information and is used in the file browser.
+,lsd,adds colors and icons to ls.
+,unzip,unzips zips. 
+,vifm,is an extensive terminal file manager that everyone likes. 
+,zathura,is a pdf viewer with vim-like bindings. 
+,zathura-pdf-mupdf,allows mupdf pdf compatibility in zathura. 
+#,,
+#,Text and Code Editing,
+,bat,can highlight code output and display files and is used to generate previews in the file browser. 
+,neovim,main text editor. vim but more. 
+,nodejs,provides the JavaScript runtime environment needed for NVChad. 
+,npm,is the Node Package Manager used to manage JavaScript libraries and dependencies.
+#,,
+#,Media Tools,
+,ffmpeg,can record and splice video and audio on the command line. 
+,ffmpegthumbnailer,creates thumbnail previews of video files. 
+,maim,can take quick screenshots at your request.
+,mpc,is a terminal interface for mpd. 
+,mdp,minimalist markdown presentation daemon.
+,mpd,is a lightweight music daemon. 
+,mpv,is the patrician's choice video player. 
+,ncmpcpp,a ncurses interface for music with multiple formats and a powerful tag editor. 
+,nsxiv,is a minimalist image viewer. 
+#,,
+#,PDF and Document Tools,
+,poppler,manipulates .pdfs and gives .pdf previews and other .pdf functions. 
+,zathura,is a pdf viewer with vim-like bindings. 
+,zathura-pdf-mupdf,allows mupdf pdf compatibility in zathura. 
+#,,
+#,Networking and Internet,
+,qbittorrent,torrenting program.
+,newsboat,is a terminal RSS client.
+,openvpn,opensource VPN client.
+,yt-dlp,can download any YouTube video (or playlist or channel) when given the link.
+A,arkenfox-user.js,provides hardened security settings for Firefox and Librewolf to avoid Mozilla spyware and general web fingerprinting. 
+A,brave-bin,secondary - chromium based - browser.
+A,librewolf-bin,is the default browser which also comes with ad-blocking and other sensible and necessary features by default. 
+#,,
+#,Communication and Scheduling,
+A,abook,is an offline addressbook usable by neomutt. 
+,calcurse,terminal-based organizer for interactive and command line use.
+,cronie,is a cron daemon used for running scheduled programs. 
+,discord,discord messanger.
+,isync,mailbox synchronizer.
+,msmtp,is a mini smtp client. 
+,neomutt,mail user agent.
+,signal-desktop,signal private messanger.
+#,,
+#,Audio and Multimedia Management,
+,pulsemixer,is an audio controller. 
+,pipewire-pulse,gives pipewire compatibility with PulseAudio programs. 
+,wireplumber,is the audio system. 
+#,,
+#,Productivity Enhancements,
+,bc,is a mathematics language used for the dropdown calculator.
+A,btop,is a graphical and colorful system monitor. 
+A,sc-im,is an Excel-like terminal spreadsheet manager.
+A,simple-mtpfs,enables the mounting of cell phones. 
+A,zsh-fast-syntax-highlighting-git,provides syntax highlighting in the shell. 
+#,,
+#,Development Tools,
+,polkit,manages user policies.
+,socat,is a utility which establishes two byte streams and transfers data between them. 
+,xcape,used for escape/super mappings. 
+,xclip,allows for copying and pasting from the command line. 
+,xdotool,provides window action utilities on the command line. 
+#,,
+#,Custom Builds,
+G,https://github.com/myhat2you/dwm.git,is the window manager. 
+G,https://github.com/myhat2you/dwmblocks.git,serves as the modular status bar. 
+G,https://github.com/myhat2you/dmenu.git,dropdown menu of UI selected commands. 
+G,https://github.com/myhat2you/st.git,is my custom build of suckless's terminal emulator. 
+G,https://github.com/myhat2you/mutt-wizard.git,is a light-weight terminal-based email system. 
+G,https://github.com/myhat2you/slock.git,fork of simple screen locker for x.
