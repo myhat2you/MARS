@@ -14,6 +14,7 @@
 ,dosfstools,allows your computer to access dos-like filesystems.
 ,libnotify,allows desktop notifications.
 ,dunst,is a suckless notification system.
+,dmenu,runs commands and provides a UI for selection.
 ,calcurse,terminal-based organizer for interactive and command line use
 ,exfat-utils,allows management of FAT drives.
 ,nsxiv,is a minimalist image viewer.
@@ -61,7 +62,6 @@ A,task-spooler,queues commands or files for download.
 A,simple-mtpfs,enables the mounting of cell phones.
 A,btop,is a graphical and colorful system monitor.
 G,https://github.com/myhat2you/dwmblocks.git,serves as the modular status bar.
-G,https://github.com/myhat2you/dmenu.git,runs commands and provides a UI for selection.
 G,https://github.com/myhat2you/st.git,is my custom build of suckless's terminal emulator.
 G,https://github.com/myhat2you/dwm.git,is the window manager.
 G,https://github.com/myhat2you/mutt-wizard.git,is a light-weight terminal-based email system.
