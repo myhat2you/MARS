@@ -201,7 +201,7 @@ makeuserjs(){
 	chown "$name:wheel" "$arkenfox" "$userjs"
 	# Install the updating script.
 	mkdir -p /usr/local/lib /etc/pacman.d/hooks
-	cp "/home/$name/.local/bin/arkenfox-auto-update" /usr/local/lib/
+	cp "/home/$name/.local/bin/tools/arkenfox-auto-update" /usr/local/lib/
 	chown root:root /usr/local/lib/arkenfox-auto-update
 	chmod 755 /usr/local/lib/arkenfox-auto-update
 	# Trigger the update when needed via a pacman hook.
