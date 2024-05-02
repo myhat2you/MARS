@@ -7,9 +7,9 @@
 ### OPTIONS AND VARIABLES ###
 
 dotfilesrepo="https://github.com/myhat2you/rice.git"
-progsfile="https://raw.githubusercontent.com/myhat2you/MARS/master/static/progs.csv"
+progsfile="https://raw.githubusercontent.com/myhat2you/MARS/main/static/progs.csv"
 aurhelper="yay"
-repobranch="master"
+repobranch="main"
 export TERM=ansi
 
 ### FUNCTIONS ###
