@@ -14,6 +14,7 @@
 ,dosfstools,allows your computer to access dos-like filesystems.
 ,libnotify,allows desktop notifications.
 ,dunst,is a suckless notification system.
+,cronie,is a cron daemon used for running scheduled programs.
 ,dmenu,runs commands and provides a UI for selection.
 ,calcurse,terminal-based organizer for interactive and command line use
 ,exfat-utils,allows management of FAT drives.

@@ -190,6 +190,17 @@ vimplugininstall() {
 	sudo -u "$name" nvim -c "PlugInstall|q|q"
 }
 
+makecronjobs() {
+  whiptail --infobox "Creating cronjobs for news, mail and package updates..." 7 60
+  display="DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS='unix:path=/run/user/1000/bus' /usr/bin/bash"
+  crontab -l > mycron
+  echo "*/10 * * * * $display newsup" >> mycron   # refresh news every 10 minutes
+  echo "5 */2 * * * $display checkup" >> mycron   # sync package updates every 2 hours
+  crontab mycron
+  rm mycron
+  systemctl --user $name enable cronie
+}
+
 makeuserjs(){
 	# Get the Arkenfox user.js and prepare it.
 	arkenfox="$pdir/arkenfox.js"
@@ -346,6 +357,9 @@ echo "export \$(dbus-launch)" >/etc/profile.d/dbus.sh
 	# Enable left mouse button by tapping
 	Option "Tapping" "on"
 EndSection' >/etc/X11/xorg.conf.d/40-libinput.conf
+
+# Creating cronjobs
+makecronjobs
 
 # All this below to get Librewolf installed with add-ons and non-bad settings.
 
