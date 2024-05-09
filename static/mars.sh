@@ -188,17 +188,20 @@ vimplugininstall() {
 	curl -Ls "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" >  "/home/$name/.config/nvim/autoload/plug.vim"
 	chown -R "$name:wheel" "/home/$name/.config/nvim"
 	sudo -u "$name" nvim -c "PlugInstall|q|q"
+
+	whiptail --infobox "Installing NVChad..." 7 60
+  git clone https://github.com/NvChad/NvChad /home/$name/.config/nvim --depth X11
+  sudo -u "$name" nvim
 }
 
 makecronjobs() {
   whiptail --infobox "Creating cronjobs for news, mail and package updates..." 7 60
-  display="DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS='unix:path=/run/user/1000/bus' /usr/bin/bash"
-  crontab -l > mycron
-  echo "*/10 * * * * $display newsup" >> mycron   # refresh news every 10 minutes
-  echo "5 */2 * * * $display checkup" >> mycron   # sync package updates every 2 hours
-  crontab mycron
-  rm mycron
+  echo "*/10 * * * *   /usr/local/bin/mailsync" >> mycron
+  echo "*/10 * * * *  $HOME/.local/bin/cron/newsup" >> mycron
+  echo "*/5 */2 * * *  $HOME/.local/bin/cron/checkup" >> mycron
+  crontab mycron && rm mycron
   systemctl --user $name enable cronie
+  systemctl --user $name start cronie
 }
 
 makeuserjs(){
