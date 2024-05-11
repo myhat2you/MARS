@@ -26,7 +26,7 @@ error() {
 
 welcomemsg() {
 	whiptail --title "Welcome!" \
-		--msgbox "Welcome to Hatter's Modified Auto-Ricing Script; \\Z1MARS!\\Zn\n\n This script will automatically install a full-featured LInux desktop, riced with my preferences.\\n\\n-Hatter" 10 60
+		--msgbox "Welcome to Myhat2you's Auto-Ricing Script; MARS!\\n\\n This script will automatically install a full-featured LInux desktop, riced with my preferences.\\n\\n-Hatter" 10 60
 
 	whiptail --title "Important Note!" --yes-button "All ready!" \
 		--no-button "Return..." \
@@ -188,20 +188,22 @@ vimplugininstall() {
 	curl -Ls "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" >  "/home/$name/.config/nvim/autoload/plug.vim"
 	chown -R "$name:wheel" "/home/$name/.config/nvim"
 	sudo -u "$name" nvim -c "PlugInstall|q|q"
-
-	whiptail --infobox "Installing NVChad..." 7 60
-  git clone https://github.com/NvChad/NvChad /home/$name/.config/nvim --depth X11
+  mv /home/$name/.config/nvim /home/$name/.config/nvim-old
+  # install nvchad
+  git clone https://github.com/NvChad/starter /home/$name/.config/nvim --depth 1
+	chown -R "$name:wheel" "/home/$name/.config/nvim"
   sudo -u "$name" nvim
+  # merge original nvim config and nvchad
+  cp -nr /home/$name/.config/nvim-old/* /home/$name/.config/nvim/* 
 }
 
 makecronjobs() {
-  whiptail --infobox "Creating cronjobs for news, mail and package updates..." 7 60
-  echo "*/10 * * * *   /usr/local/bin/mailsync" >> mycron
-  echo "*/10 * * * *  $HOME/.local/bin/cron/newsup" >> mycron
-  echo "*/5 */2 * * *  $HOME/.local/bin/cron/checkup" >> mycron
-  crontab mycron && rm mycron
-  systemctl --user $name enable cronie
-  systemctl --user $name start cronie
+	whiptail --infobox "Creating cronjobs for news, mail and package updates..." 7 60
+	echo "*/10 * * * *   /usr/local/bin/mailsync" >> mycron
+	echo "*/30 * * * *  $HOME/.local/bin/cron/newsup" >> mycron
+	echo "*/5 */2 * * *  $HOME/.local/bin/cron/checkup" >> mycron
+	crontab mycron && rm mycron
+	systemctl --user $name enable --now cronie
 }
 
 makeuserjs(){
@@ -233,16 +235,16 @@ Exec=/usr/local/lib/arkenfox-auto-update" > /etc/pacman.d/hooks/arkenfox.hook
 }
 
 installffaddons(){
-	addonlist="ublock-origin decentraleyes istilldontcareaboutcookies vim-vixen"
+	addonlist="ublock-origin darkreader decentraleyes istilldontcareaboutcookies vim-vixen"
 	addontmp="$(mktemp -d)"
 	trap "rm -fr $addontmp" HUP INT QUIT TERM PWR EXIT
 	IFS=' '
 	sudo -u "$name" mkdir -p "$pdir/extensions/"
 	for addon in $addonlist; do
 		if [ "$addon" = "ublock-origin" ]; then
-			addonurl="$(curl -sL https://api.github.com/repos/gorhill/uBlock/releases/latest | grep -E 'browser_download_url.*\.firefox\.xpi' | cut -d '"' -f 4)"
+			addonurl="$(curl -sL https://api.github.com/repos/gorhill/uBlock/releases/latest | grep -E 'browser_download_url.*\.firefox\.signed\.xpi' | cut -d '"' -f 4)"
 		else
-			addonurl="$(curl --silent "https://addons.mozilla.org/en-US/firefox/addon/${addon}/" | grep -o 'https://addons.mozilla.org/firefox/downloads/file/[^"]*')"
+			addonurl="$(curl -i --silent "https://addons.mozilla.org/en-US/firefox/addon/${addon}/" | grep -o 'https://addons.mozilla.org/firefox/downloads/file/[^"]*')"
 		fi
 		file="${addonurl##*/}"
 		sudo -u "$name" curl -LOs "$addonurl" > "$addontmp/$file"
@@ -391,6 +393,9 @@ echo "%wheel ALL=(ALL:ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/
 echo "Defaults editor=/usr/bin/nvim" >/etc/sudoers.d/02-mars-visudo-editor
 mkdir -p /etc/sysctl.d
 echo "kernel.dmesg_restrict = 0" > /etc/sysctl.d/dmesg.conf
+
+# Ensure temp sudo priviledges are deleted
+[ -f /etc/sudeors.d/mars-temp ] && rm -f /etc/sudoers.d/mars-temp
 
 # Last message! Install complete!
 finalize
