@@ -183,18 +183,20 @@ putgitrepo() {
 
 vimplugininstall() {
 	# Installs vim plugins.
-	whiptail --infobox "Installing neovim plugins..." 7 60
-	mkdir -p "/home/$name/.config/nvim/autoload"
-	curl -Ls "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" >  "/home/$name/.config/nvim/autoload/plug.vim"
-	chown -R "$name:wheel" "/home/$name/.config/nvim"
-	sudo -u "$name" nvim -c "PlugInstall|q|q"
+	#whiptail --infobox "Installing neovim plugins..." 7 60
+	#mkdir -p "/home/$name/.config/nvim/autoload"
+	#curl -Ls "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" >  "/home/$name/.config/nvim/autoload/plug.vim"
+	#chown -R "$name:wheel" "/home/$name/.config/nvim"
+	#sudo -u "$name" nvim -c "PlugInstall|q|q"
+  
+  # backup custom settings
   mv /home/$name/.config/nvim /home/$name/.config/nvim-old
   # install nvchad
   git clone https://github.com/NvChad/starter /home/$name/.config/nvim --depth 1
 	chown -R "$name:wheel" "/home/$name/.config/nvim"
   sudo -u "$name" nvim
-  # merge original nvim config and nvchad
-  cp -nr /home/$name/.config/nvim-old/* /home/$name/.config/nvim/* 
+  # overwrite/merge 
+  cp -r --update=all /home/$name/.config/nvim-old/* /home/$name/.config/nvim/* 
 }
 
 makecronjobs() {
