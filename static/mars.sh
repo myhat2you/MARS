@@ -397,7 +397,7 @@ mkdir -p /etc/sysctl.d
 echo "kernel.dmesg_restrict = 0" > /etc/sysctl.d/dmesg.conf
 
 # Ensure temp sudo priviledges are deleted
-[ -f /etc/sudeors.d/mars-temp ] && rm -f /etc/sudoers.d/mars-temp
+[ -f /etc/sudoers.d/mars-temp ] && rm -f /etc/sudoers.d/mars-temp
 
 # Last message! Install complete!
 finalize
