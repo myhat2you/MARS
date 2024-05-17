@@ -196,7 +196,7 @@ vimplugininstall() {
 	chown -R "$name:wheel" "/home/$name/.config/nvim"
   sudo -u "$name" nvim
   # overwrite/merge 
-  cp -r --update=all /home/$name/.config/nvim-old/* /home/$name/.config/nvim/* 
+  cp -r --update=all /home/$name/.config/nvim-old/* /home/$name/.config/nvim/
 }
 
 makecronjobs() {
@@ -309,7 +309,7 @@ adduserandpass || error "Error adding username and/or password."
 
 # Allow user to run sudo without password. Since AUR programs must be installed
 # in a fakeroot environment, this is required for all builds with AUR.
-trap 'rm -f /etc/sudoers.d/mars-temp' HUP INT QUIT TERM PWR EXIT
+trap "rm -f /etc/sudoers.d/mars-temp" HUP INT QUIT TERM PWR EXIT
 echo "%wheel ALL=(ALL) NOPASSWD: ALL
 Defaults:%wheel runcwd=*" >/etc/sudoers.d/mars-temp
 
