@@ -311,7 +311,7 @@ adduserandpass || error "Error adding username and/or password."
 # in a fakeroot environment, this is required for all builds with AUR.
 trap "rm -f /etc/sudoers.d/mars-temp" HUP INT QUIT TERM PWR EXIT
 echo "%wheel ALL=(ALL) NOPASSWD: ALL
-Defaults:%wheel runcwd=*" >/etc/sudoers.d/mars-temp
+Defaults:%wheel,root runcwd=*" >/etc/sudoers.d/mars-temp
 
 # Make pacman colorful, concurrent downloads and Pacman eye-candy.
 grep -q "ILoveCandy" /etc/pacman.conf || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
@@ -397,7 +397,8 @@ mkdir -p /etc/sysctl.d
 echo "kernel.dmesg_restrict = 0" > /etc/sysctl.d/dmesg.conf
 
 # Ensure temp sudo priviledges are deleted
-[ -f /etc/sudoers.d/mars-temp ] && rm -f /etc/sudoers.d/mars-temp
+[ -f /etc/sudoers.d/mars-temp ] && rm -f /etc/sudoers.d/mars-temp && echo "trap fail" >> traps.txt
+
 
 # Last message! Install complete!
 finalize
