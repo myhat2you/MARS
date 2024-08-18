@@ -1,8 +1,8 @@
 #!/bin/sh
 
-# Joshua's Modified Auto-Ricing Script (MARS)
-# modded by Joshua Talbot <joshuadtalbot3@gmail.com>
-# inspired by Luke Smith <luke@lukesmith.xyz>
+# Myhat2you's Modified Auto-Ricing Script (MARS)
+# modded by J Talbot <talbot@hackersec.xyz>
+# inspired by Luke Smith's LARBS <luke@lukesmith.xyz>
 
 ### OPTIONS AND VARIABLES ###
 
@@ -181,22 +181,13 @@ putgitrepo() {
 	sudo -u "$name" cp -rfT "$dir" "$2"
 }
 
-vimplugininstall() {
-	# Installs vim plugins.
-	#whiptail --infobox "Installing neovim plugins..." 7 60
-	#mkdir -p "/home/$name/.config/nvim/autoload"
-	#curl -Ls "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" >  "/home/$name/.config/nvim/autoload/plug.vim"
-	#chown -R "$name:wheel" "/home/$name/.config/nvim"
-	#sudo -u "$name" nvim -c "PlugInstall|q|q"
-  
-  # backup custom settings
-  mv /home/$name/.config/nvim /home/$name/.config/nvim-old
+nvchadinstall() {
+  # remove previous config
+  rm -r /home/$name/.config/nvim
   # install nvchad
   git clone https://github.com/NvChad/starter /home/$name/.config/nvim --depth 1
 	chown -R "$name:wheel" "/home/$name/.config/nvim"
   sudo -u "$name" nvim
-  # overwrite/merge 
-  cp -r --update=all /home/$name/.config/nvim-old/* /home/$name/.config/nvim/
 }
 
 makecronjobs() {
@@ -204,8 +195,8 @@ makecronjobs() {
 	echo "*/10 * * * *   /usr/local/bin/mailsync" >> mycron
 	echo "*/30 * * * *  $HOME/.local/bin/cron/newsup" >> mycron
 	echo "*/5 */2 * * *  $HOME/.local/bin/cron/checkup" >> mycron
-	crontab mycron && rm mycron
-	systemctl --user $name enable --now cronie
+	sudo -u "$name" crontab mycron && rm mycron
+	sudo -u "$name" systemctl --user enable --now cronie
 }
 
 makeuserjs(){
@@ -336,8 +327,8 @@ installationloop
 putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
 rm -rf "/home/$name/.git/" "/home/$name/README.md" "/home/$name/LICENSE" "/home/$name/FUNDING.yml"
 
-# Install vim plugins if not alread present.
-[ ! -f "/home/$name/.config/nvim/autoload/plug.vim" ] && vimplugininstall
+# Install nvchad ontop of neovim.
+[ ! -f "/home/$name/.config/nvim/lua/custom/chadrc.lua" ] && nvchadinstall
 
 # Most important command! Get rid of the beep!
 rmmod pcspkr
@@ -396,9 +387,11 @@ echo "Defaults editor=/usr/bin/nvim" >/etc/sudoers.d/02-mars-visudo-editor
 mkdir -p /etc/sysctl.d
 echo "kernel.dmesg_restrict = 0" > /etc/sysctl.d/dmesg.conf
 
+# Enable audio services
+sudo -u "$name" systemctl --user enable wireplumber pipewire pipewire-pulse
+
 # Ensure temp sudo priviledges are deleted
 [ -f /etc/sudoers.d/mars-temp ] && rm -f /etc/sudoers.d/mars-temp && echo "trap fail" >> traps.txt
-
 
 # Last message! Install complete!
 finalize

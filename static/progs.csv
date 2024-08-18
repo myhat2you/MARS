@@ -2,10 +2,12 @@
 ,xorg-server,is the graphical server. This first one may take a while as it pulls many other dependencies first on clean installs.
 ,xorg-xwininfo,allows querying information about windows.
 ,xorg-xinit,starts the graphical server.
+,xorg-xset,user preference utility for X. Increases keypress rate.
 ,polkit,manages user policies.
 ,ttf-hack-nerd,provides the mono font for MARS.
 ,ttf-font-awesome,provides extended glyph support.
 ,ttf-dejavu,properly displays emojis.
+,neovim,main text editor. vim but more.
 ,vifm,is an extensive terminal file manager that everyone likes.
 ,bc,is a mathematics language used for the dropdown calculator.
 ,xcompmgr,is for transparency and removing screen-tearing.
