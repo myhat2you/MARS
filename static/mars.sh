@@ -196,7 +196,7 @@ makecronjobs() {
 	echo "*/30 * * * *  $HOME/.local/bin/cron/newsup" >> mycron
 	echo "*/5 */2 * * *  $HOME/.local/bin/cron/checkup" >> mycron
 	sudo -u "$name" crontab mycron && rm mycron
-	sudo -u "$name" systemctl --user enable --now cronie
+	sudo -u "$name" systemctl enable cronie
 }
 
 makeuserjs(){
